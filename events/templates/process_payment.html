@@ -1,0 +1,95 @@
+<form method="post" class="p-4 shadow-lg rounded border">
+    {% csrf_token %}
+
+    <h3 class="text-center mb-4">Make a Payment</h3>
+
+    <div class="mb-3">
+        <label for="phone_number" class="form-label">Phone Number</label>
+        <input type="text" class="form-control form-control-lg" id="phone_number" name="phone_number" placeholder="254712345678" required>
+        <div class="form-text text-muted">Please enter your phone number starting with "254" (Kenya).</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="amount" class="form-label">Amount</label>
+        <input type="number" class="form-control form-control-lg" id="amount" name="amount" placeholder="Enter amount" required>
+        <div class="form-text text-muted">Enter the amount to pay.</div>
+    </div>
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary btn-lg pay-button">Pay Now</button>
+    </div>
+</form>
+
+<style>
+
+    form {
+        background-color: #ffffff;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+        color: #343a40;
+        font-weight: bold;
+    }
+
+    .form-label {
+        color: #495057;
+        font-weight: 600;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        border-color: #ced4da;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+
+    .form-text {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+
+    .pay-button {
+        font-size: 1.2rem;
+        padding: 12px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .pay-button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .pay-button:focus {
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+    }
+
+
+    @media (max-width: 576px) {
+        form {
+            padding: 15px;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+        }
+
+        .btn-lg {
+            font-size: 1rem;
+        }
+
+        .form-control-lg {
+            font-size: 1rem;
+        }
+    }
+</style>
+

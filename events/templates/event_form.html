@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="form-title mb-4">{{ form.instance.pk|yesno:"Edit Event,Create Event" }}</h1>
+
+<form method="post" class="needs-validation enhanced-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary save-button">Save</button>
+        <a href="/" class="btn btn-secondary back-link">Back to List</a>
+    </div>
+</form>
+
+<style>
+
+    .form-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #343a40;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+
+    .enhanced-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .enhanced-form input,
+    .enhanced-form select,
+    .enhanced-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    .enhanced-form input:focus,
+    .enhanced-form select:focus,
+    .enhanced-form textarea:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .save-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .save-button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .back-link {
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .back-link:hover {
+        background-color: #495057;
+        transform: scale(1.05);
+    }
+</style>
+
+{% endblock %}

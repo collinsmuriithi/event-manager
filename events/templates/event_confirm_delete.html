@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="delete-event-container">
+    <h1 class="mb-4 delete-heading">Delete Event</h1>
+    <p class="delete-confirm-text">Are you sure you want to delete "<span class="event-name">{{ event.name }}</span>"?</p>
+    <form method="post" class="delete-form">
+        {% csrf_token %}
+        <div class="button-group">
+            <button type="submit" class="btn btn-danger delete-btn">Yes, Delete</button>
+            <a href="/" class="btn btn-secondary cancel-btn">Cancel</a>
+        </div>
+    </form>
+</div>
+<style>
+    /* Container Styling */
+    .delete-event-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 10px;
+        background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+    }
+
+    /* Heading Styling */
+    .delete-heading {
+        color: #dc3545;
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    /* Text Styling */
+    .delete-confirm-text {
+        font-size: 1.2rem;
+        color: #495057;
+        margin-bottom: 30px;
+    }
+    .event-name {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    /* Button Group Styling */
+    .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    /* Button Styling */
+    .delete-btn {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        font-size: 1rem;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+    }
+
+    .delete-btn:hover {
+        background-color: #bd2130;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(220, 53, 69, 0.5);
+    }
+
+    .cancel-btn {
+        background-color: #6c757d;
+        color: #fff;
+        border: none;
+        font-size: 1rem;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: transform 0.2s ease-in-out, box-shadow 0.3s ease;
+    }
+
+    .cancel-btn:hover {
+        background-color: #5a6268;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(108, 117, 125, 0.5);
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 576px) {
+        .button-group {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+</style>
+{% endblock %}

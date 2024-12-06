@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block title %}Event List{% endblock %}
+
+{% block content %}
+<h1 class="event-list-title mb-4">Event List</h1>
+
+<form method="get" class="search-form mb-4">
+    <div class="input-group">
+        <input
+            type="text"
+            name="q"
+            class="form-control search-input"
+            placeholder="Search events..."
+            value="{{ query }}">
+        <button type="submit" class="btn btn-primary search-button">Search</button>
+    </div>
+</form>
+
+<table class="table table-hover event-table">
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in events %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ event.title }}</td>
+            <td>{{ event.date }}</td>
+            <td>
+                <a href="{% url 'event_detail' event.id %}" class="btn btn-info btn-sm action-button">View</a>
+                <a href="{% url 'event_update' event.id %}" class="btn btn-warning btn-sm action-button">Edit</a>
+                <a href="{% url 'event_delete' event.id %}" class="btn btn-danger btn-sm action-button">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center no-events-row">No events found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination-container">
+    {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+            {% endif %}
+            <li class="page-item active"><span class="page-link">{{ page_obj.number }}</span></li>
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</div>
+
+<style>
+
+    .event-list-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #343a40;
+        text-align: center;
+    }
+
+
+    .search-form .search-input {
+        border-radius: 5px 0 0 5px;
+        padding: 10px;
+    }
+
+    .search-form .search-button {
+        border-radius: 0 5px 5px 0;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .search-form .search-button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .event-table {
+        margin-top: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .event-table thead {
+        background-color: #343a40;
+        color: white;
+    }
+
+    .event-table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .no-events-row {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #6c757d;
+    }
+
+
+    .action-button {
+        margin-right: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .action-button:hover {
+        transform: scale(1.05);
+    }
+
+    .btn-info:hover, .btn-warning:hover, .btn-danger:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination .page-link {
+        color: #343a40;
+    }
+
+    .pagination .page-link:hover {
+        background-color: #f8f9fa;
+        color: #007bff;
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+</style>
+{% endblock %}
